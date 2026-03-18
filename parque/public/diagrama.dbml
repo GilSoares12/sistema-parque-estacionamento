@@ -1,0 +1,129 @@
+Table ajustes {
+    id int [pk, increment]
+    nome varchar
+    descricao text
+    filial varchar
+    direcao text
+    telefone varchar
+    logo varchar
+    logo_auto varchar
+    divisa varchar
+    correio varchar
+    pagina_web varchar
+    creat_at timestamp
+    update_at timestamp
+}
+
+Table usuarios {
+    id int [pk, increment]
+    name varchar
+    email varchar
+    password varchar
+    remember_token varchar
+    nomes varchar
+    apelidos varchar
+    tipo_documento varchar
+    nro_documento varchar
+    celular varchar
+    data_nascimento date
+    genero varchar
+    direcao text
+    foto varchar
+    contacto_nome varchar
+    contacto_telefone varchar
+    contacto_parentesco varchar
+    creat_at timestamp
+    update_at timestamp
+}
+
+Table espacos {
+    id int [pk, increment]
+    numero varchar
+    estado varchar
+
+    creat_at timestamp
+    update_at timestamp
+}
+
+Table tarifas {
+    id int [pk, increment]
+    nome varchar
+    tipo varchar
+    custo decimal
+    miutos_de_graca int
+    
+    creat_at timestamp
+    update_at timestamp
+}
+
+Table clientes {
+    id int [pk, increment]
+    nomes string
+    numero_documento string
+    email string
+    contacto string
+    genero string
+    estaso boolean
+    
+    creat_at timestamp
+    update_at timestamp
+}
+
+Table veiculos {
+    id int [pk, increment]
+    cliente_id int [ref: > clientes.id]
+    placa string
+    marca string
+    modelo string
+    cor string
+    tipo string
+    creat_at timestamp
+    update_at timestamp
+}
+
+Table tickets {
+    id int [pk, increment]
+    espaco_id int [ref: > espacos.id]
+    cliente_id int [ref: > clientes.id]
+    veiculo_id int [ref: > veiculos.id]
+    tarifa_id int [ref: > tarifas.id]
+    usuario_id int [ref: > usuarios.id]
+    codigo_ticket string
+    data_entrada date
+    hora_entrada date
+    data_saida date
+    hora_saida date
+    tempo_total string
+    valor_total decimal
+    estado_ticket string
+    obs string
+    creat_at timestamp
+    update_at timestamp
+}
+Table reservas {
+    id int [pk, increment]
+    espaco_id int [ref: > espacos.id]
+    cliente_id int [ref: > clientes.id]
+    veiculo_id int [ref: > veiculos.id]
+    usuario_id int [ref: > usuarios.id]
+    hora_entrada date
+    hora_saida date
+    estado_reserva string
+    creat_at timestamp
+    update_at timestamp
+}
+
+Table facturacao {
+    id int [pk, increment]
+    ticket_id int [ref: > tickets.id]
+    usuario_id int [ref: > usuarios.id]
+    nro_factura int
+    nome_cliente string
+    nro_documento string
+    placa string
+    detalhe string
+    valor_total decimal
+        
+    creat_at timestamp
+    update_at timestamp
+}
